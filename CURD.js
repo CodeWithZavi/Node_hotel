@@ -14,7 +14,7 @@ app.post('/create-item', (req, res) => {
     res.send(`Item created: ${newItem.name}`);
 });
 
-
+// testing
 app.put('/update-item', (req, res) => {
     const updatedItem = { name: "Updated Item", price: 150 };
     res.send(`Item updated: ${updatedItem.name}`);
