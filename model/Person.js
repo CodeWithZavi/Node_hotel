@@ -10,7 +10,7 @@ const personSchema = new mongoose.Schema({
         type: Number,
 
     },
-    // work
+
     work: {
         type: String,
         // now workder is anyone okay so use enum for that
