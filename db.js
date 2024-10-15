@@ -1,7 +1,12 @@
 const mongoose = require('mongoose');
-
+require('dotenv').config(); // cuz we protect mongo
 // mongo db  cpnnection                      "data base name"
-const mongoURL = 'mongodb://localhost:27017/hotels'
+// this connection is for local 
+//const mongoURL = 'mongodb://localhost:27017/hotels'
+//const mongoURL = process.env.MONGODB_URL_LOCAL;
+
+// now for online mongo atlus : 
+//const mongoURL = 'mongodb+srv://codewithzavi:zavian12345@cluster0.cjswk.mongodb.net/?retryWrites=true&w=majority';
 
 // set up connection with mongo db
 // mongoose.connect(mongoURL, {
@@ -9,8 +14,13 @@ const mongoURL = 'mongodb://localhost:27017/hotels'
 //     // we ensure we work we new version of mongo so its must
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
+
 // })
-mongoose.connect('mongodb://localhost:27017/hotels', {
+
+// BY ENV : 
+// for mongo : 
+const mongoURL = process.env.MONGODB_URL;
+mongoose.connect(mongoURL, {
     //useNewUrlParser: true, // This can also be removed if unnecessary
     //useUnifiedTopology: true // This can also be removed
 });
