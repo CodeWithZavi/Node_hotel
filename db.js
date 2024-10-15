@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 require('dotenv').config(); // cuz we protect mongo
 // mongo db  cpnnection                      "data base name"
 // this connection is for local 
-//const mongoURL = 'mongodb://localhost:27017/hotels'
+//const mongoURL =mongo LOCAL IN ENV'
 //const mongoURL = process.env.MONGODB_URL_LOCAL;
 
 // now for online mongo atlus : 
-//const mongoURL = 'mongodb+srv://codewithzavi:zavian12345@cluster0.cjswk.mongodb.net/?retryWrites=true&w=majority';
+//const mongoURL = cheeck env 
 
 // set up connection with mongo db
 // mongoose.connect(mongoURL, {
