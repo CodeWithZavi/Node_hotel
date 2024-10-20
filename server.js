@@ -15,6 +15,7 @@ app.get('/', function (req, res) {
 
      res.send("Wellcome to out hotel")
 })
+
 // import Menu router:
 const menuRoutes = require('./routes/menuRoutes');
 // // use 
