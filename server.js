@@ -7,10 +7,6 @@ require('dotenv').config(); // server know he has dot env file
 const PORT = process.env.PORT || 3000;
 // if port no is present it will use that port and if not it will use 3000
 
-
-
-
-
 const bodyParser = require('body-parser');  // first install body parser
 app.use(bodyParser.json());  //b as we know we send json data so we use .json() and for differnt we use diff bodyParser
 
