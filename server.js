@@ -27,7 +27,8 @@ app.use('/person1', personRoutes);
 
 
 
-
 app.listen(PORT, () => {
      console.log("server is runnig");
 });  // 300 =>  telll yahan server active ha 
+
+module.exports = app;

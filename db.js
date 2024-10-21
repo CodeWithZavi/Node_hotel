@@ -19,8 +19,8 @@ require('dotenv').config(); // cuz we protect mongo
 
 // BY ENV : 
 // for mongo : 
-const MONGODB_URL_LOCAL = process.env.MONGODB_URL;
-mongoose.connect(MONGODB_URL_LOCAL, {
+const mongoURL = process.env.MONGODB_URL;
+mongoose.connect(mongoURL, {
     //useNewUrlParser: true, // This can also be removed if unnecessary
     //useUnifiedTopology: true // This can also be removed
 });
