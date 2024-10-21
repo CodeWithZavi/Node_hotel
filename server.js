@@ -13,7 +13,7 @@ app.use(bodyParser.json());  //b as we know we send json data so we use .json() 
 // it will recive data convert in obj and store in req.get
 app.get('/', function (req, res) {
 
-     res.send("Wellcome to out hotel")
+     res.send("Wellcome to our hotel ")
 })
 
 // import Menu router:
