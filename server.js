@@ -10,12 +10,18 @@ const PORT = process.env.PORT || 3000;
 const bodyParser = require('body-parser');  // first install body parser
 app.use(bodyParser.json());  //b as we know we send json data so we use .json() and for differnt we use diff bodyParser
 
-// it will recive data convert in obj and store in req.get
+app.use(express.static('public'));
+
+// Set up routes
 app.get('/', function (req, res) {
+     res.sendFile(__dirname + '/public/index.html'); // Serve the HTML page
+});
 
-     res.send("Wellcome to our hotel ")
-})
+// it will recive data convert in obj and store in req.get
+// app.get('/', function (req, res) {
 
+//      res.send("Wellcome to our hotel ")
+// })
 // import Menu router:
 const menuRoutes = require('./routes/menuRoutes');
 // // use 

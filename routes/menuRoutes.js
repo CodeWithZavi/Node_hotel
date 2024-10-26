@@ -47,7 +47,7 @@ router.get('/:tasteType', async (req, res) => {
     }
     catch (error) {
         console.log(error);  // Use `error` here as well
-        res.status(500).json({ error: 'internal error' });
+        res.status(500).json({ error: error.message });
     }
 });
 

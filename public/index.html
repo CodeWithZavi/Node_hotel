@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .content {
+            margin-top: 20px;
+        }
+
+        .form-container {
+            margin: 20px auto;
+            width: 300px;
+            text-align: left;
+        }
+
+        label,
+        input,
+        select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Our Hotel</h1>
+
+    <!-- Menu Section -->
+    <div class="content">
+        <h2>Menu</h2>
+        <button onclick="fetchMenu()">View Menu</button>
+        <button onclick="toggleMenuForm()">Add Menu Item</button>
+        <div id="menuList"></div>
+
+        <div id="menuForm" class="form-container" style="display: none;">
+            <h3>Add New Menu Item</h3>
+            <label>Name:</label>
+            <input type="text" id="menuName" />
+            <label>Price:</label>
+            <input type="number" id="menuPrice" />
+            <label>Taste:</label>
+            <select id="menuTaste">
+                <option value="sour">Sour</option>
+                <option value="sweet">Sweet</option>
+                <option value="spicy">Spicy</option>
+            </select>
+            <label>Is Drink:</label>
+            <select id="isDrink">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+            <label>Ingredients (comma-separated):</label>
+            <input type="text" id="menuIngredients" />
+            <button onclick="addMenuItem()">Submit</button>
+        </div>
+    </div>
+
+    <!-- Person Section -->
+    <div class="content">
+        <h2>Staff</h2>
+        <button onclick="fetchPersons()">View Staff</button>
+        <button onclick="togglePersonForm()">Add Staff Member</button>
+        <div id="personList"></div>
+
+        <div id="personForm" class="form-container" style="display: none;">
+            <h3>Add New Staff Member</h3>
+            <label>Name:</label>
+            <input type="text" id="personName" />
+            <label>Age:</label>
+            <input type="number" id="personAge" />
+            <label>Role:</label>
+            <select id="personWork">
+                <option value="chef">Chef</option>
+                <option value="manager">Manager</option>
+                <option value="waiter">Waiter</option>
+            </select>
+            <label>Mobile:</label>
+            <input type="text" id="personMobile" />
+            <label>Email:</label>
+            <input type="email" id="personEmail" />
+            <label>Address:</label>
+            <input type="text" id="personAddress" />
+            <label>Salary:</label>
+            <input type="number" id="personSalary" />
+            <button onclick="addPerson()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        // Toggle display of Menu form
+        function toggleMenuForm() {
+            const form = document.getElementById("menuForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        }
+
+        // Fetch Menu items
+        async function fetchMenu() {
+            const response = await fetch('/menu');
+            const menu = await response.json();
+            const menuList = document.getElementById('menuList');
+            menuList.innerHTML = '<h3>Menu Items</h3>' + menu.map(item => `
+                <div>
+                    <strong>${item.name}</strong>: $${item.price}, Taste: ${item.taste}, Ingredients: ${item.ingredients.join(", ")}
+                </div>
+            `).join('');
+        }
+
+        // Add Menu item
+        async function addMenuItem() {
+            const data = {
+                name: document.getElementById("menuName").value,
+                price: parseFloat(document.getElementById("menuPrice").value),
+                taste: document.getElementById("menuTaste").value,
+                is_drink: document.getElementById("isDrink").value === "true",
+                ingredients: document.getElementById("menuIngredients").value.split(",").map(ingredient => ingredient.trim())
+            };
+
+            await fetch('/menu', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            toggleMenuForm();
+            fetchMenu();
+        }
+
+        // Toggle display of Person form
+        function togglePersonForm() {
+            const form = document.getElementById("personForm");
+            form.style.display = form.style.display === "none" ? "block" : "none";
+        }
+
+        // Fetch Person records
+        async function fetchPersons() {
+            const response = await fetch('/person1');
+            const persons = await response.json();
+            const personList = document.getElementById('personList');
+            personList.innerHTML = '<h3>Staff Members</h3>' + persons.map(person => `
+                <div>
+                    <strong>Name:</strong> ${person.name}, Role: ${person.work}, Age: ${person.age}, Mobile: ${person.mobile}, Email: ${person.email}
+                </div>
+            `).join('');
+        }
+
+        // Add Person record
+        async function addPerson() {
+            const data = {
+                name: document.getElementById("personName").value,
+                age: parseInt(document.getElementById("personAge").value),
+                work: document.getElementById("personWork").value,
+                mobile: document.getElementById("personMobile").value,
+                email: document.getElementById("personEmail").value,
+                address: document.getElementById("personAddress").value,
+                salary: parseFloat(document.getElementById("personSalary").value)
+            };
+
+            await fetch('/person1', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            togglePersonForm();
+            fetchPersons();
+        }
+    </script>
+</body>
+
+</html>
