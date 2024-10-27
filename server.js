@@ -14,6 +14,7 @@ app.use(express.static('public'));
 
 // Set up routes
 app.get('/', function (req, res) {
+
      res.sendFile(__dirname + '/public/index.html'); // Serve the HTML page
 });
 
